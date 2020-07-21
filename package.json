@@ -1,12 +1,11 @@
 {
   "name": "set-time",
   "version": "0.0.0",
-  "description": "Sets timezone aware time to Date instance",
+  "description": "Sets time to Date instance.",
   "keywords": [
     "date",
     "datetime",
-    "time",
-    "timezone"
+    "time"
   ],
   "homepage": "https://github.com/MunifTanjim/js-set-time#readme",
   "bugs": {
