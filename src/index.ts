@@ -10,14 +10,18 @@ export const timeStringRegex = /^(?:[0-1][0-9]|2[0-3])(?:(?::[0-5][0-9])(?::[0-5
  * @param timeString string representing time in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601#Times) format
  */
 export const setTime = (date: Date | string, timeString: string): Date => {
-  const datetime = new Date(date)
-
-  if (Number.isNaN(datetime.getTime())) {
-    throw new Error('invalid date')
+  if (typeof date === 'string' && !/Z$/.test(date)) {
+    throw new Error('invalid date string')
   }
 
   if (!timeStringRegex.test(timeString)) {
     throw new Error('invalid pattern for timeString')
+  }
+
+  const datetime = new Date(date)
+
+  if (Number.isNaN(datetime.getTime())) {
+    throw new Error('invalid date instance')
   }
 
   const [time, offsetSign = 'Z', offset = ''] = timeString.split(/([Z+-])/)
