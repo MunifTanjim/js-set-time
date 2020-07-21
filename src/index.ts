@@ -1,13 +1,13 @@
 /**
- * Pattern for ISO 8601 compliant time string with optional time zone
+ * Pattern for ISO 8601 compliant time string with optional UTC time offset
  */
 export const timeStringRegex = /^(?:[0-1][0-9]|2[0-3])(?:(?::[0-5][0-9])(?::[0-5][0-9](?:\.[0-9]{1,3})?)?)?(?:Z|[+-](?:0[0-9]|1[0-2])(?::[0-5][0-9])?)?$/
 
 /**
  * Returns an instance of `Date` with time set according to `timeString`
  *
- * @param date instance of `Date` or string in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601#Times) format
- * @param timeString string representing time in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601#Times) format
+ * @param date `Date` instance or string in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601#Times) format (with zero UTC offset), e.g. `2020-01-01T00:00:00Z`
+ * @param timeString string representing time in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601#Times) format, e.g. `00:00:00+00:00`
  */
 export const setTime = (date: Date | string, timeString: string): Date => {
   if (typeof date === 'string' && !/Z$/.test(date)) {
