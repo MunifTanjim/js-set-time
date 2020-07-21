@@ -26,16 +26,16 @@ describe('timeStringRegex', () => {
 })
 
 describe('setTime', () => {
-  test('accepts valid ISO 8601 string as date param', () => {
-    const dates = [
-      '2020-01-01T00:00:00',
-      '2020-01-01T00:00:00Z',
-      '2020-01-01T00:00:00+06:00',
-      '2020-01-01T00:00:00-06:00',
-    ]
+  test('accepts valid ISO 8601 string (with zero UTC offset) as date param', () => {
+    const date = '2020-01-01T00:00:00Z'
+    expect(() => setTime(date, '00')).not.toThrow()
+  })
+
+  test('rejects valid ISO 8601 string (with UTC time offset) as date param', () => {
+    const dates = ['2020-01-01T00:00:00+06:00', '2020-01-01T00:00:00-06:00']
 
     for (const date of dates) {
-      expect(() => setTime(date, '00')).not.toThrow()
+      expect(() => setTime(date, '00')).toThrow()
     }
   })
 
@@ -64,7 +64,7 @@ describe('setTime', () => {
   })
 
   test('rejects invalid timeString pattern', () => {
-    const date = '2020-01-01T00:00:00'
+    const date = '2020-01-01T00:00:00Z'
 
     expect(() => setTime(date, '00:00:00 UTC')).toThrow()
   })
@@ -84,8 +84,9 @@ describe('setTime', () => {
     ['00:00:00+06:00', '2020-01-10T18:00:00Z'],
     ['00:20:00+00:45', '2020-01-10T23:35:00Z'],
     ['01:30:00+03:00', '2020-01-10T22:30:00Z'],
-  ])('(2020-01-11, %s) -> %s', (timeString, resultDate) => {
-    const date = '2020-01-11'
+  ])('%s -> %s', (timeString, resultDate) => {
+    const date = '2020-01-11T00:00:00Z'
+
     expect(setTime(date, timeString)).toStrictEqual(new Date(resultDate))
   })
 })
