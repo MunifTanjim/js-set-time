@@ -1,6 +1,6 @@
 {
   "name": "set-time",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Sets time to Date instance.",
   "keywords": [
     "date",
