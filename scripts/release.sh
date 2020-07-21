@@ -12,6 +12,7 @@ if [ "${curr_version}" = "${prev_version}" ]; then
   exit 1
 fi
 
+git add package.json
 git commit -m "chore: release v$curr_version"
 git tag "$curr_version" -m "v$curr_version"
 
