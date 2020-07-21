@@ -30,11 +30,13 @@
     "url": "https://github.com/MunifTanjim/js-set-time"
   },
   "scripts": {
+    "prebuild": "rimraf lib/*",
     "build": "microbundle",
     "changelog": "conventional-changelog --config .changelogrc.js -i CHANGELOG.md -s -a",
     "postchangelog": "git add CHANGELOG.md",
     "cz": "git-cz",
     "dev": "microbundle watch",
+    "prepack": "yarn run build",
     "release": "./scripts/release.sh",
     "test": "jest",
     "version": "yarn run changelog"
